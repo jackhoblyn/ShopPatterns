@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Product;
 
 class HomeController extends Controller
 {
@@ -23,6 +24,10 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $showProducts = Product::orderBy('id')->take(3)->get();
+        
+        $products = Product::orderBy('id', 'desc')->take(12)->get();
+
+        return view('home', compact('products', 'showProducts'));
     }
 }

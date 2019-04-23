@@ -19,6 +19,18 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
+Route::get('/products', 'ProductsController@index')->name('index');
+
+Route::get('/product', 'ProductsController@show')->name('show');
+
+Route::get('/search', 'SearchController@show')->name('show');
+
+Route::get('/cart', 'ProductsController@cart')->name('cart');
+
+Route::get('/checkout', 'ProductsController@checkout')->name('checkout');
+
+Route::get('/thankyou', 'ProductsController@thankyou')->name('thankyou');
+
 
 
 Route::prefix('admin')->group(function(){
