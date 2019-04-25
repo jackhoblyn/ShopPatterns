@@ -26,6 +26,7 @@
       <a href="{{ Request::fullUrlWithQuery(['sort' => 'manufacturer']) }}" style="font-size: 2rem; color:orange; font-family: calibri";>Manufacturer</a><br>
       <a href="{{ Request::fullUrlWithQuery(['sort' => 'category']) }}" style="font-size: 2rem; color:orange; font-family: calibri";>Category</a><br>
       <a href="{{ Request::fullUrlWithQuery(['sort' => 'price']) }}" style="font-size: 2rem; color:orange; font-family: calibri";>Price</a><br>
+      <a href="/products" style="font-size: 2rem; color:#00ff00; font-family: calibri";>Clear</a><br>
   </div>
 
   <div class="row" style="margin-left: 10%; margin-right: 10%; margin-top: 3%">

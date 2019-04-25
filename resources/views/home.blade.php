@@ -50,10 +50,24 @@
           <a href="#"><img class="card-img-top" src="/images/{{ $product->image }}" alt=""></a>
           <div class="card-body">
             <h4 class="card-title">
-              <a href="#">{{ $product->name }}</a>
-          </h4>
+              <a href="{{ $product->path() }}" class="text-black no-underline">{{ $product->name }}</a>
+            </h4>
           <h5>€{{ $product->price }}</h5>
+          <h5>{{ $product->stock }}</h5>
           <p class="card-text">{{ $product->manufacturer }}</p>
+
+          <form action="/cart" method="POST">
+            @csrf
+            <input type="hidden" name="id" value="{{ $product->id }}">
+            <input type="hidden" name="name" value="{{ $product->name }}">
+            <input type="hidden" name="price" value="{{ $product->price }}">
+            <input type="hidden" name="qty" value="{{ $product->stock }}">
+            <input type="hidden" name="category" value="{{ $product->category }}">
+            <input type="hidden" name="image" value="{{ $product->image }}">
+            <input type="hidden" name="manufacturer" value="{{ $product->manufacturer }}">
+
+            <button type="submit" class="button button-plain">Add to Cart</button>
+          </form>
       </div>
       <div class="card-footer">
         <small class="text-muted">&#9733; &#9733; &#9733; &#9733; &#9734;</small>

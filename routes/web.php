@@ -21,11 +21,15 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('/products', 'ProductsController@index')->name('index');
 
-Route::get('/product', 'ProductsController@show')->name('show');
+Route::get('/products/{product}', 'ProductsController@show')->name('show');
 
 Route::get('/search', 'SearchController@show')->name('show');
 
-Route::get('/cart', 'ProductsController@cart')->name('cart');
+Route::get('/cart', 'CartController@index')->name('cart.index');
+
+Route::get('/cart/show', 'CartController@show')->name('cart.show');
+
+Route::post('/cart', 'CartController@store')->name('cart.store');
 
 Route::get('/checkout', 'ProductsController@checkout')->name('checkout');
 

@@ -11,6 +11,10 @@ class Product extends Model
     protected $guarded = [];
     public $asYouType = true;
 
+    public function path()
+    {
+        return "/products/{$this->id}";
+    }
 
      /**
      * Get the indexable data array for the model.
