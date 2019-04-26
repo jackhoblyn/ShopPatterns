@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Seeder;
 
-class ProductsTableSeeder extends Seeder
+class LaptopSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -11,7 +11,6 @@ class ProductsTableSeeder extends Seeder
      */
     public function run()
     {
-        $phones = factory(App\Product::class, 'phone', 20)->create();
-        
+		$laptops = factory(App\Product::class, 'laptop', 17)->create();
     }
 }

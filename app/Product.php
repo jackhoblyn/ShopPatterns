@@ -44,4 +44,19 @@ class Product extends Model
     {
         $this->update(['rating' => $rating]);
     }
+
+    public function buy()
+    {
+        $this->decrement('stock', 1);
+    }
+
+    public function restock()
+    {
+        $this->increment('stock', 1);
+    }
+
+    public function edit()
+    {
+        return "/products/edit/{$this->id}";
+    }
 }

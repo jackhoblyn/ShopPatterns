@@ -12,10 +12,13 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect()->route('home');
 });
 
 Auth::routes();
+
+
+Route::group(['middleware' => 'auth'], function () {
 
 Route::get('/home', 'HomeController@index')->name('home');
 
@@ -43,7 +46,11 @@ Route::get('/checkout', 'ProductsController@checkout')->name('checkout');
 
 Route::get('/thankyou', 'ProductsController@thankyou')->name('thankyou');
 
+});
 
+	Route::get('/products/edit/{product}', 'ProductsController@edit');
+
+	Route::patch('/products/edit/{product}', 'ProductsController@update');
 
 Route::prefix('admin')->group(function(){
 
@@ -55,7 +62,20 @@ Route::prefix('admin')->group(function(){
 
 	Route::post('/login', 'Auth\AdminLoginController@login')->name('admin.login.submit');
 
+	
+
 	Route::get('/', 'AdminController@index')->name('admin.dashboard');
+
+	Route::get('/admin/search', 'SearchController@adminshow')->name('admin.show');
+
+	Route::get('/customers', 'AdminController@customers')->name('admin.customers');
+
+	Route::get('/customers/{user}', 'AdminController@show')->name('admin.customers.show');
+
+	Route::patch('/increase/{product}', 'ProductsController@increase');
+
+	Route::patch('/decrease/{product}', 'ProductsController@decrease');
+
 
 });
 

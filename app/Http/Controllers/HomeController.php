@@ -26,7 +26,7 @@ class HomeController extends Controller
     {
         $showProducts = Product::orderBy('id')->take(3)->get();
         
-        $products = Product::orderBy('id', 'desc')
+        $products = Product::orderBy('stock', 'asc')
             ->take(12)
             ->where('stock', '>', 0)
             ->get();

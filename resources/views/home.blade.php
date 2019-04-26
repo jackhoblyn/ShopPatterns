@@ -97,10 +97,10 @@
             <button type="submit" class="button button-plain">Add to Cart</button>
           </form>
       </div>
-</div>
-</div>
+    </div>
+  </div>
 @empty
-<div style="margin-top: 15%; margin-left: 15%; padding-top: 7%; font-family: 'Nunito';"><h1>No ads yet!</h1></div>
+  <div style="margin-top: 15%; margin-left: 15%; padding-top: 7%; font-family: 'Nunito';"><h1>No ads yet!</h1></div>
 @endforelse
 
 

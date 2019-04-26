@@ -148,7 +148,7 @@ class CartController extends Controller
         foreach ($items as $item)
         {
             $product = Product::find($item->id);
-            $product->decrement('stock', 1);
+            $product->buy();
         }
 
         \Cart::session($userId)->clear();
