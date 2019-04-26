@@ -5,7 +5,7 @@
 <div style="margin-left: 11%; margin-top: 2%">
 
     <div style="float: left">
-      <h1 style="color: green; margin-left: -1rem;"> Search Results </h1>
+      <h1 style="color: green; margin-left: -1rem;"> All Products </h1>
     </div>
     <div style="float: right; margin-right: 10rem;">
       <form method="GET" action="search">
@@ -33,25 +33,51 @@
       @forelse ($products as $product)
       <div class="col-lg-4 col-md-6 mb-4">
         <div class="card h-100">
-          <a href="#"><img class="card-img-top" src="/images/{{ $product->image }}" alt=""></a>
+           <a href="{{ $product->path() }}"><img class="card-img-top" src="/images/{{ $product->image }}" alt=""></a>
 
 
           <div class="card-body">
             <h4 class="card-title">
-              <a href="#">{{ $product->name }}</a>
+              <a href="{{ $product->path() }}" class="text-black no-underline">{{ $product->name }}</a>
             </h4>
             <h5>€{{ $product->price }}</h5>
             <p class="card-text">{{ $product->manufacturer }}</p>
-          </div>
+          
 
-          <div class="card-footer">
-            <small class="text-muted">&#9733; &#9733; &#9733; &#9733; &#9734;</small>
-          </div>
+           @foreach(range(1,5) as $i)
+                <span class="fa-stack" style="width:1em">
+                    <i class="far fa-star fa-stack-1x"></i>
+
+                    @if($product->rating >0)
+                        @if($product->rating >0.5)
+                            <i class="fas fa-star fa-stack-1x"></i>
+                        @else
+                            <i class="fas fa-star-half fa-stack-1x"></i>
+                        @endif
+                    @endif
+                    @php $product->rating--; @endphp
+                </span>
+            @endforeach
+            <p class="card-text">{{ $product->manufacturer }}</p>
+
+            <form action="/cart" method="POST">
+            @csrf
+            <input type="hidden" name="id" value="{{ $product->id }}">
+            <input type="hidden" name="name" value="{{ $product->name }}">
+            <input type="hidden" name="price" value="{{ $product->price }}">
+            <input type="hidden" name="qty" value="{{ $product->stock }}">
+            <input type="hidden" name="category" value="{{ $product->category }}">
+            <input type="hidden" name="image" value="{{ $product->image }}">
+            <input type="hidden" name="manufacturer" value="{{ $product->manufacturer }}">
+
+            <button type="submit" class="button button-plain">Add to Cart</button>
+          </form>
         </div>
       </div>
-      @empty
-        <div style="margin-top: 10%; margin-left: 15%; padding-top: 7%; font-family: 'Nunito';"><h1>Nothing to show yet!</h1></div>
-      @endforelse
+    </div>
+    @empty
+      <div style="margin-top: 10%; margin-left: 15%; padding-top: 7%; font-family: 'Nunito';"><h1>Nothing to show yet!</h1></div>
+    @endforelse
 
   </div>
 </div>

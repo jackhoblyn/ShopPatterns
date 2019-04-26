@@ -21,6 +21,7 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 
     <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
 
 
     <style>
@@ -55,7 +56,6 @@
                         <!-- Authentication Links -->
                         <a href="/cart" class="btn btn-success btn-sm ml-3" href="cart.html" style="margin-bottom: 1rem; margin-top: 0.5rem; margin-right: 1rem">
                             <i class="fa fa-shopping-cart"></i> Cart
-                            <span class="badge badge-light">3</span>
                         </a>
                         @guest
                             <li class="nav-item">

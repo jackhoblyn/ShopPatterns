@@ -10,7 +10,10 @@ class ProductsController extends Controller
     public function index() 
 
     {
-    	$products = Product::orderBy('id', 'desc')->get();
+    	$products = Product::orderBy('id', 'desc')
+    		->take(100)
+    		->where('stock', '>', 0)
+    		->get();
 
     	return view('products/index', compact('products'));
     }

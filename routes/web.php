@@ -23,6 +23,8 @@ Route::get('/products', 'ProductsController@index')->name('index');
 
 Route::get('/products/{product}', 'ProductsController@show')->name('show');
 
+Route::post('/products/{product}', 'ReviewsController@store')->name('review.post');
+
 Route::get('/search', 'SearchController@show')->name('show');
 
 Route::get('/cart', 'CartController@index')->name('cart.index');
@@ -30,6 +32,12 @@ Route::get('/cart', 'CartController@index')->name('cart.index');
 Route::get('/cart/show', 'CartController@show')->name('cart.show');
 
 Route::post('/cart', 'CartController@store')->name('cart.store');
+
+Route::get('/cart/checkout', 'CartController@checkout')->name('cart.checkout');
+
+Route::post('/cart/checkout', 'CartController@pay')->name('cart.pay');
+
+Route::delete('/cart/delete/{id}','CartController@destroy');
 
 Route::get('/checkout', 'ProductsController@checkout')->name('checkout');
 

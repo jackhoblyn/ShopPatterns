@@ -1,9 +1,13 @@
 @import url(https://fonts.googleapis.com/css?family=Nunito);
 
+@import url(//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css);
+
 footer {
   padding-top: 200px;
   margin-bottom: -7rem;
 }
+
+
 
 .table>tbody>tr>td, .table>tfoot>tr>td{
     vertical-align: middle;
@@ -39,6 +43,27 @@ footer {
 	table#cart tfoot td .btn{display:block;}
 	
 }
+
+.starrating > input {display: none;}  /* Remove radio buttons */
+
+.starrating > label:before { 
+  content: "\f005"; /* Star */
+  margin: 2px;
+  font-size: 2em;
+  font-family: FontAwesome;
+  display: inline-block; 
+}
+
+.starrating > label
+{
+  color: #222222; /* Start color when not clicked */
+}
+
+.starrating > input:checked ~ label
+{ color: #ffca08 ; } /* Set yellow color when star checked */
+
+.starrating > input:hover ~ label
+{ color: #ffca08 ;  } /* Set yellow color when star hover */
 
 /*!
  * Bootstrap v4.1.3 (https://getbootstrap.com/)

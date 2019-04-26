@@ -14,13 +14,11 @@ class SearchController extends Controller
     	$sort = trim($request->input('sort'));
     	$sort = in_array($sort, ['id', 'manufacturer', 'category', 'price']) ? $sort : 'name';
 
-    	$products = Product::search($search)->orderBy($sort)->paginate(25);
+    	$products = Product::search($search)->orderBy($sort)->paginate(100);
 
     	if (request()->expectsJson()) {
     		return $products;
     	}
-
-
 
     	return view('products/index', compact('products'));
     }

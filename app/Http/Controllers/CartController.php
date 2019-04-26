@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Darryldecode\Cart\CartCondition;
+use App\Order;
+use App\Product;
 
 
 class CartController extends Controller
@@ -53,7 +55,7 @@ class CartController extends Controller
         
         $item = \Cart::session($userId)->add($id, $name, $price, $qty, $customAttributes);
 
-        return redirect()->route('cart.index')->with('success_message', 'Item added to cart');
+        return redirect()->route('home')->with('message', 'Item added to cart');
 
             
     }
@@ -99,6 +101,65 @@ class CartController extends Controller
     }
 
     /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function checkout()
+    {
+        $userId = auth()->user()->id; 
+
+        $items = \Cart::session($userId)->getContent();
+
+        return view('products/checkout', compact('items'));
+    }
+
+    public function pay()
+    {
+        $userId = auth()->user()->id;
+
+        // $name = request('name');
+        // $address1 = request('address1');
+        // $address2 = request('address2');
+        // $country = request('country');
+        // $cardnum = request('name');
+        // $expMonth = request('expMonth');
+        // $expYear = request('expYear');
+        // $cvc = request('CVC');
+
+        $items = \Cart::session($userId)->getContent();
+
+        $amount = $items->sum('price');
+
+        $order = Order::create([
+            'user_id' => $userId,
+            'name' => request('name'),
+            'address1' => request('address1'),
+            'address2' => request('address2'),
+            'country' => request('country'),
+            'card_number' => request('cardnum'),
+            'expMonth' => request('expMonth'),
+            'expYear' => request('expYear'),
+            'CVC' => request('CVC'),
+            'amount' => $amount
+        ]);
+
+        foreach ($items as $item)
+        {
+            $product = Product::find($item->id);
+            $product->decrement('stock', 1);
+        }
+
+        \Cart::session($userId)->clear();
+
+        return redirect()->route('home')->with('message', 'Thank you for your purchase!');
+
+
+        
+    }
+
+    /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -118,6 +179,12 @@ class CartController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $userId = auth()->user()->id;
+
+        \Cart::session($userId)->remove($id);
+
+        return redirect()->route('cart.index');
+
+        //dd('delete' . $id);
     }
 }

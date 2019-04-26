@@ -26,7 +26,10 @@ class HomeController extends Controller
     {
         $showProducts = Product::orderBy('id')->take(3)->get();
         
-        $products = Product::orderBy('id', 'desc')->take(12)->get();
+        $products = Product::orderBy('id', 'desc')
+            ->take(12)
+            ->where('stock', '>', 0)
+            ->get();
 
         return view('home', compact('products', 'showProducts'));
     }

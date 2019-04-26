@@ -16,6 +16,11 @@ class Product extends Model
         return "/products/{$this->id}";
     }
 
+    public function delete()
+    {
+        return "/products/delete/{$this->id}";
+    }
+
      /**
      * Get the indexable data array for the model.
      *
@@ -28,5 +33,15 @@ class Product extends Model
         // Customize array...
 
         return $array;
+    }
+
+    public function reviews()
+    {
+        return $this->hasMany(Review::class);
+    }
+
+    public function avg($rating)
+    {
+        $this->update(['rating' => $rating]);
     }
 }
